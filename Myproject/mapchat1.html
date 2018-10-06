@@ -1,0 +1,81 @@
+
+<html>
+    <head>
+        <title>Map Chat</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            #map{
+                height:500px;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Map Chat</h1>
+        <div id ="map"></div>
+        <script>
+            function initMap(){
+                var options = {
+                    zoom:10,
+                    center:{lat:29.4727,lng:77.7085}
+                };
+                
+                var map = new
+                google.maps.Map(document.getElementById('map'),options);
+         
+            
+            
+           var markers = [
+               {
+                   coords:{lat:29.4844,lng:77.7152},
+                  content: '<h1> Gandhi Colony </h1>'
+               },
+               {
+                   coords:{lat:29.4365,lng:77.5748},
+                  content: '<h1> Mandi </h1>'
+               },
+               {
+                   coords:{lat:29.4769,lng:77.8777},
+                   content: '<h1> Mandi </h1>'
+               }
+              
+               
+           ];
+        
+           for(var i = 0 ; i < markers.length ; i++){
+               addMarker(markers[i]);
+           };
+       
+      
+              function addMarker(props){
+                var marker = new google.maps.Marker({
+                   position: props.coords,
+                   map:map
+               });
+               if(props.content){
+                   var infowWindow = new google.maps.InfowWindow({
+                       content:props.content
+                   });
+                   marker.addListener('click',function(){
+                       infowWindow.open(map,marker);
+                   });
+               }
+               
+           }
+            google.maps.event.addListener(map , 'click' , function(event){
+                    addMarker({coords:event.latlng});
+                })
+           
+       }
+   
+        
+            
+        </script>
+         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoGXiMt0EjiPeCizghv5ai4kZ1GQHwH64&callback=initMap"
+                 async defer>
+                     </script>
+
+
+    </body>
+</html>

@@ -1,0 +1,52 @@
+
+<html>
+    <head>
+        <title>Map Chat Portal</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+        function getchat(){
+            var n = document.getElementById("name").value;
+            var e = document.getElementById("email").value;
+            var cm = document.getElementById("chatmsg").value;
+            var req = XMLHttpRequest();
+            req.onreadystatechange=function(){
+                document.getElementById("response").innerHTML = req.responseText;
+            }
+            req.open("get","MyChatApp.php?name="+n,true);
+            req.open("get","MyChatApp.php?email="+e,true);
+            req.open("get","MyChatApp.php?chatmsg="+cm,true);
+            req.send(null);
+        }
+         </script>
+    </head>
+    <body>
+        <table border="1">
+           
+            <tbody>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" name="name" value="" id="name" /></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="text" name="email" value="" id="email"/></td>
+                </tr>
+                <tr>
+                    <td>Role:</td>
+                    <td><input type="radio" name="role" value="Admin" />Admin &nbsp;&nbsp;<input type="radio" name="role" value="Member" />Member</td>
+                </tr>
+                <tr>
+                    <td>Enter Your Message:</td>
+                    <td><input type="text" name="chatmsg" value="" id="chatmsg"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center">
+                        <input type="submit" value="Send" onclick="getChat()" /></td>
+                    
+                </tr>
+            </tbody>
+        </table>
+        <div id="response"></div>
+    </body>
+</html>
